@@ -26,20 +26,89 @@ public class JF_Jogo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jP_Background = new javax.swing.JPanel();
+        jP_InnerBackground = new javax.swing.JPanel();
+        jL_Titulo = new javax.swing.JLabel();
+        jSep_TituloMenu = new javax.swing.JSeparator();
+        jScrolP = new javax.swing.JScrollPane();
+        jTP_Interface = new javax.swing.JTextPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 500));
+
+        jP_Background.setBackground(new java.awt.Color(0, 0, 0));
+        jP_Background.setPreferredSize(new java.awt.Dimension(600, 500));
+
+        jP_InnerBackground.setBackground(new java.awt.Color(102, 102, 102));
+
+        jL_Titulo.setFont(new java.awt.Font("Felix Titling", 1, 48)); // NOI18N
+        jL_Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jL_Titulo.setText("Dr. Disease");
+
+        jSep_TituloMenu.setBackground(new java.awt.Color(0, 0, 0));
+        jSep_TituloMenu.setForeground(new java.awt.Color(0, 0, 0));
+        jSep_TituloMenu.setOpaque(true);
+
+        jTP_Interface.setBackground(new java.awt.Color(102, 102, 102));
+        jTP_Interface.setBorder(null);
+        jTP_Interface.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jTP_Interface.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jScrolP.setViewportView(jTP_Interface);
+
+        javax.swing.GroupLayout jP_InnerBackgroundLayout = new javax.swing.GroupLayout(jP_InnerBackground);
+        jP_InnerBackground.setLayout(jP_InnerBackgroundLayout);
+        jP_InnerBackgroundLayout.setHorizontalGroup(
+            jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSep_TituloMenu)
+            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrolP)
+                    .addComponent(jL_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jP_InnerBackgroundLayout.setVerticalGroup(
+            jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jL_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSep_TituloMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrolP, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jP_BackgroundLayout = new javax.swing.GroupLayout(jP_Background);
+        jP_Background.setLayout(jP_BackgroundLayout);
+        jP_BackgroundLayout.setHorizontalGroup(
+            jP_BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_BackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jP_InnerBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jP_BackgroundLayout.setVerticalGroup(
+            jP_BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_BackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jP_InnerBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -78,5 +147,11 @@ public class JF_Jogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jL_Titulo;
+    private javax.swing.JPanel jP_Background;
+    private javax.swing.JPanel jP_InnerBackground;
+    private javax.swing.JScrollPane jScrolP;
+    private javax.swing.JSeparator jSep_TituloMenu;
+    private javax.swing.JTextPane jTP_Interface;
     // End of variables declaration//GEN-END:variables
 }
