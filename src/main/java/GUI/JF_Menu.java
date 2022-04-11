@@ -4,6 +4,8 @@ package GUI;
 **/
 public class JF_Menu extends javax.swing.JFrame {
 
+    String strNomeJogador;
+    
     /**
      * Creates new form JF_Menu
      */
@@ -13,6 +15,9 @@ public class JF_Menu extends javax.swing.JFrame {
         jTF_NomeJogador.setText("");
     }
 
+    public String passaNome() {
+        return strNomeJogador = jTF_NomeJogador.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content   of this method is always
@@ -29,6 +34,12 @@ public class JF_Menu extends javax.swing.JFrame {
         jL_NomeJogador = new javax.swing.JLabel();
         jTF_NomeJogador = new javax.swing.JTextField();
         jB_Jogar = new javax.swing.JButton();
+        jL_Top1 = new javax.swing.JLabel();
+        jL_Top2 = new javax.swing.JLabel();
+        jL_Top3 = new javax.swing.JLabel();
+        jL_Top1Saida = new javax.swing.JLabel();
+        jL_Top2Saida = new javax.swing.JLabel();
+        jL_Top3Saida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Menu"); // NOI18N
@@ -65,22 +76,51 @@ public class JF_Menu extends javax.swing.JFrame {
             }
         });
 
+        jL_Top1.setText("#1");
+
+        jL_Top2.setText("#2");
+
+        jL_Top3.setText("#3");
+
+        jL_Top1Saida.setText("Melhor jogo 1");
+
+        jL_Top2Saida.setText("Melhor jogo 2");
+
+        jL_Top3Saida.setText("Melhor jogo 3");
+
         javax.swing.GroupLayout jP_InnerBackgroundLayout = new javax.swing.GroupLayout(jP_InnerBackground);
         jP_InnerBackground.setLayout(jP_InnerBackgroundLayout);
         jP_InnerBackgroundLayout.setHorizontalGroup(
             jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSep_TituloMenu)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_InnerBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTF_NomeJogador)
-                    .addComponent(jL_Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(jL_NomeJogador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jB_Jogar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_InnerBackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTF_NomeJogador)
+                            .addComponent(jL_Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                            .addComponent(jL_NomeJogador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jB_Jogar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                                .addComponent(jL_Top1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jL_Top1Saida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                                .addComponent(jL_Top3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jL_Top3Saida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                                .addComponent(jL_Top2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jL_Top2Saida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jP_InnerBackgroundLayout.setVerticalGroup(
             jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +133,19 @@ public class JF_Menu extends javax.swing.JFrame {
                 .addComponent(jL_NomeJogador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTF_NomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_Top1)
+                    .addComponent(jL_Top1Saida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_Top2)
+                    .addComponent(jL_Top2Saida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_Top3)
+                    .addComponent(jL_Top3Saida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jB_Jogar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
@@ -133,6 +185,7 @@ public class JF_Menu extends javax.swing.JFrame {
     private void jB_JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_JogarActionPerformed
         JF_Jogo abrir = new JF_Jogo();
         abrir.setVisible(true);
+        JF_Jogo.jL_NomeJogador.setText(passaNome());
         this.setVisible(false);
     }//GEN-LAST:event_jB_JogarActionPerformed
 
@@ -175,6 +228,12 @@ public class JF_Menu extends javax.swing.JFrame {
     private javax.swing.JButton jB_Jogar;
     private javax.swing.JLabel jL_NomeJogador;
     private javax.swing.JLabel jL_Titulo;
+    private javax.swing.JLabel jL_Top1;
+    private javax.swing.JLabel jL_Top1Saida;
+    private javax.swing.JLabel jL_Top2;
+    private javax.swing.JLabel jL_Top2Saida;
+    private javax.swing.JLabel jL_Top3;
+    private javax.swing.JLabel jL_Top3Saida;
     private javax.swing.JPanel jP_Background;
     private javax.swing.JPanel jP_InnerBackground;
     private javax.swing.JSeparator jSep_TituloMenu;

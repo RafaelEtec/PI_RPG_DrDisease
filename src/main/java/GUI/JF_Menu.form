@@ -74,19 +74,43 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSep_TituloMenu" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTF_NomeJogador" max="32767" attributes="0"/>
-                          <Component id="jL_Titulo" alignment="0" pref="376" max="32767" attributes="0"/>
-                          <Component id="jL_NomeJogador" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jTF_NomeJogador" max="32767" attributes="0"/>
+                                  <Component id="jL_Titulo" alignment="0" pref="376" max="32767" attributes="0"/>
+                                  <Component id="jL_NomeJogador" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                              <Component id="jB_Jogar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jL_Top1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jL_Top1Saida" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jL_Top3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jL_Top3Saida" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jL_Top2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jL_Top2Saida" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                      <Component id="jB_Jogar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -101,7 +125,22 @@
                       <Component id="jL_NomeJogador" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTF_NomeJogador" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jL_Top1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jL_Top1Saida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jL_Top2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jL_Top2Saida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jL_Top3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jL_Top3Saida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                       <Component id="jB_Jogar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
@@ -166,6 +205,36 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_JogarActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="#1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="#2"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="#3"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top1Saida">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Melhor jogo 1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top2Saida">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Melhor jogo 2"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jL_Top3Saida">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Melhor jogo 3"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
