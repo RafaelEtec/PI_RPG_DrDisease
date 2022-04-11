@@ -131,10 +131,8 @@ public class JF_Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_JogarActionPerformed
-        String strNomeJogador = jTF_NomeJogador.getText();
         JF_Jogo abrir = new JF_Jogo();
         abrir.setVisible(true);
-        //JF_Jogo.jL_NomeJogador.setText(strNomeJogador);
         this.setVisible(false);
     }//GEN-LAST:event_jB_JogarActionPerformed
 
