@@ -175,7 +175,7 @@ public class JF_Jogo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Reiniciar;
-    private javax.swing.JLabel jL_NomeJogador;
+    public static javax.swing.JLabel jL_NomeJogador;
     private javax.swing.JLabel jL_Titulo;
     private javax.swing.JPanel jP_Background;
     private javax.swing.JPanel jP_InnerBackground;
