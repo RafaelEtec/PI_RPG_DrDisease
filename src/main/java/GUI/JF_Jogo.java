@@ -32,9 +32,10 @@ public class JF_Jogo extends javax.swing.JFrame {
         jSep_TituloMenu = new javax.swing.JSeparator();
         jScrolP = new javax.swing.JScrollPane();
         jTP_Interface = new javax.swing.JTextPane();
+        jL_NomeJogador = new javax.swing.JLabel();
+        jB_Reiniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 500));
 
         jP_Background.setBackground(new java.awt.Color(0, 0, 0));
         jP_Background.setPreferredSize(new java.awt.Dimension(600, 500));
@@ -55,6 +56,18 @@ public class JF_Jogo extends javax.swing.JFrame {
         jTP_Interface.setSelectionColor(new java.awt.Color(0, 0, 0));
         jScrolP.setViewportView(jTP_Interface);
 
+        jL_NomeJogador.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        jL_NomeJogador.setText("Nickname");
+
+        jB_Reiniciar.setBackground(new java.awt.Color(102, 102, 102));
+        jB_Reiniciar.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
+        jB_Reiniciar.setText("Reiniciar");
+        jB_Reiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ReiniciarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jP_InnerBackgroundLayout = new javax.swing.GroupLayout(jP_InnerBackground);
         jP_InnerBackground.setLayout(jP_InnerBackgroundLayout);
         jP_InnerBackgroundLayout.setHorizontalGroup(
@@ -64,7 +77,11 @@ public class JF_Jogo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrolP)
-                    .addComponent(jL_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                    .addComponent(jL_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                    .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                        .addComponent(jL_NomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jB_Reiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jP_InnerBackgroundLayout.setVerticalGroup(
@@ -75,8 +92,12 @@ public class JF_Jogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSep_TituloMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrolP, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrolP, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_NomeJogador)
+                    .addComponent(jB_Reiniciar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jP_BackgroundLayout = new javax.swing.GroupLayout(jP_Background);
@@ -104,12 +125,18 @@ public class JF_Jogo extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jB_ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ReiniciarActionPerformed
+        JF_Menu abrir = new JF_Menu();
+        abrir.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jB_ReiniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +174,8 @@ public class JF_Jogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_Reiniciar;
+    private javax.swing.JLabel jL_NomeJogador;
     private javax.swing.JLabel jL_Titulo;
     private javax.swing.JPanel jP_Background;
     private javax.swing.JPanel jP_InnerBackground;
