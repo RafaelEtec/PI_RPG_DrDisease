@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package GUI;
+
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -15,6 +14,7 @@ public class JF_Jogo extends javax.swing.JFrame {
      */
     public JF_Jogo() {
         initComponents();
+        jTP_Interface.setEditable(false);
     }
 
     /**
@@ -34,6 +34,8 @@ public class JF_Jogo extends javax.swing.JFrame {
         jTP_Interface = new javax.swing.JTextPane();
         jL_NomeJogador = new javax.swing.JLabel();
         jB_Reiniciar = new javax.swing.JButton();
+        jTF_Comm = new javax.swing.JTextField();
+        jL_ComandoTXT = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,17 @@ public class JF_Jogo extends javax.swing.JFrame {
             }
         });
 
+        jTF_Comm.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        jTF_Comm.setText("Comando");
+        jTF_Comm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTF_CommKeyPressed(evt);
+            }
+        });
+
+        jL_ComandoTXT.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
+        jL_ComandoTXT.setText("Insira o Comando :");
+
         javax.swing.GroupLayout jP_InnerBackgroundLayout = new javax.swing.GroupLayout(jP_InnerBackground);
         jP_InnerBackground.setLayout(jP_InnerBackgroundLayout);
         jP_InnerBackgroundLayout.setHorizontalGroup(
@@ -79,9 +92,17 @@ public class JF_Jogo extends javax.swing.JFrame {
                     .addComponent(jScrolP)
                     .addComponent(jL_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                     .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
-                        .addComponent(jL_NomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jB_Reiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(6, 6, 6)
+                        .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                                .addComponent(jL_ComandoTXT)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTF_Comm, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jP_InnerBackgroundLayout.createSequentialGroup()
+                                .addComponent(jL_NomeJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jB_Reiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jP_InnerBackgroundLayout.setVerticalGroup(
@@ -93,11 +114,15 @@ public class JF_Jogo extends javax.swing.JFrame {
                 .addComponent(jSep_TituloMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrolP, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTF_Comm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL_ComandoTXT))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jP_InnerBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jL_NomeJogador)
                     .addComponent(jB_Reiniciar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jP_BackgroundLayout = new javax.swing.GroupLayout(jP_Background);
@@ -125,7 +150,7 @@ public class JF_Jogo extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+            .addComponent(jP_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
 
         pack();
@@ -137,6 +162,14 @@ public class JF_Jogo extends javax.swing.JFrame {
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jB_ReiniciarActionPerformed
+
+    private void jTF_CommKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF_CommKeyPressed
+        String strComm = jTF_Comm.getText();
+        
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jTP_Interface.setText("Comando Recebido: " +strComm);
+        }
+    }//GEN-LAST:event_jTF_CommKeyPressed
 
     /**
      * @param args the command line arguments
@@ -175,12 +208,14 @@ public class JF_Jogo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Reiniciar;
+    private javax.swing.JLabel jL_ComandoTXT;
     public static javax.swing.JLabel jL_NomeJogador;
     private javax.swing.JLabel jL_Titulo;
     private javax.swing.JPanel jP_Background;
     private javax.swing.JPanel jP_InnerBackground;
     private javax.swing.JScrollPane jScrolP;
     private javax.swing.JSeparator jSep_TituloMenu;
+    public static javax.swing.JTextField jTF_Comm;
     private javax.swing.JTextPane jTP_Interface;
     // End of variables declaration//GEN-END:variables
 }
