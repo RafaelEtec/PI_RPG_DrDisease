@@ -15,6 +15,7 @@ public class JF_Jogo extends javax.swing.JFrame {
     public JF_Jogo() {
         initComponents();
         jTP_Interface.setEditable(false);
+        jTF_Comm.setText("");
     }
 
     /**
@@ -168,6 +169,7 @@ public class JF_Jogo extends javax.swing.JFrame {
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             jTP_Interface.setText("Comando Recebido: " +strComm);
+            jTF_Comm.setText("");
         }
     }//GEN-LAST:event_jTF_CommKeyPressed
 

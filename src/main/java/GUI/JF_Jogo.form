@@ -110,7 +110,7 @@
                       <Component id="jSep_TituloMenu" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrolP" min="-2" pref="380" max="-2" attributes="0"/>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTF_Comm" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jL_ComandoTXT" alignment="3" min="-2" max="-2" attributes="0"/>
