@@ -181,6 +181,8 @@ public class JF_Jogo extends javax.swing.JFrame {
             jTP_Interface.setText(recebeComando + ultimoComando);
             guardaComando = ultimoComando;
             Limpar();
+            jTP_Interface.setText("Comando Recebido: " +strComm);
+            jTF_Comm.setText("");
         }
     }//GEN-LAST:event_jTF_CommKeyPressed
 
