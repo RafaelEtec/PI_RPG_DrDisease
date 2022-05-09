@@ -9,12 +9,21 @@ import java.awt.event.KeyEvent;
  */
 public class JF_Jogo extends javax.swing.JFrame {
 
+    public static String recebeComando = "Comando recebido: ";
+    public static String ultimoComando = "";
+    public static String guardaComando = "";
+    
     /**
      * Creates new form JF_Jogo
      */
     public JF_Jogo() {
         initComponents();
         jTP_Interface.setEditable(false);
+        jTF_Comm.setText("");
+    }
+    
+    public void Limpar() {
+        jTF_Comm.setText("");
     }
 
     /**
@@ -167,7 +176,11 @@ public class JF_Jogo extends javax.swing.JFrame {
         String strComm = jTF_Comm.getText();
         
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jTP_Interface.setText("Comando Recebido: " +strComm);
+            guardaComando = guardaComando + jTF_Comm.getText();
+            ultimoComando = strComm;
+            jTP_Interface.setText(recebeComando + ultimoComando);
+            guardaComando = ultimoComando;
+            Limpar();
         }
     }//GEN-LAST:event_jTF_CommKeyPressed
 
