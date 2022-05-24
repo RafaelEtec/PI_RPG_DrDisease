@@ -18,6 +18,7 @@ public class Main {
                          strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos\n"
                                      + "| <Infectar>    ou     <inf> --> Propaga a sua doença"
                                      + "| <Evoluir>     ou     <evo> --> Evolui a sua doença"
+                                     + "| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura"
                                      + "| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo\n"
                                      + "| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos\n"
                                      + "| <Habilidades> ou     <hab> --> Mostra suas habilidades\n"
@@ -27,18 +28,18 @@ public class Main {
                                      + "| <Tutorial>  ou       <tut> --> Explica como jogar o jogo\n"
                                      + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )";
     public static boolean boolJogando = true, boolTutorial = false;
-    public static int contaminados = 100000000, mortos = 100000000, entPais, populacaoPais, entAgenteInf, dificuldade;
-    public static double porcentagemCont = 0, porcentagemMortos = 0;
+    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, dificuldade, nivelDoenca = 0, paisFrio, paisCalor;
+    public static double porcentagemCont = 0, porcentagemMortos = 0, porcentagemCura = 0;
     public static int[] habilidades = new int[7];
     public static String[] strHabilidades = {"Resistência ao Frio", "Resistência ao Calor", "Infecciosidade", "Mortalidade", "Força de Propagação", "Tempo de vida", "Resistência à vacina"};
-    
-    // Res frio
-    // Res calor
-    // Infecciosidade
-    // Mortalidade
-    // Força de propagação
-    // Tempo de vida ou durabilidade
-    // resistência à vacina
+
+    // Res frio - 0
+    // Res calor - 1
+    // Infecciosidade - 2
+    // Mortalidade - 3
+    // Força de propagação - 4
+    // Tempo de vida ou durabilidade - 5
+    // resistência à vacina - 6
     // 
     // 
     // 
@@ -61,7 +62,7 @@ public class Main {
         
         entAgenteInf = agenteInfeccioso();
         
-        System.out.println(strComandos);
+        System.out.println(strTituloDD + "\n" + strComandos);
         while (boolJogando) {
             System.out.println(strTituloDD+strComando);
             entComando = ent.next();
@@ -89,7 +90,7 @@ public class Main {
                     System.out.println(strHabilidades[pos]+": ");
                     atribui = ent.nextInt();
                 }
-                habilidades[pos] = atribui;
+                habilidades[pos] = habilidades[pos] + atribui;
                 pontos = pontos - atribui;
             }
         }
@@ -101,8 +102,10 @@ public class Main {
                 + "\n| <0> Fácil   - Não há Cura "
                 + "\n| <1> Normal  - Há Cura "
                 + "\n| <2> Difícil - A Cura evolui mais rápido" + "\n";
-        mostraTextoLento(strArmazenaDificuldade);
-        dificuldade = ent.nextInt();
+        do {
+            mostraTextoLento(strArmazenaDificuldade);
+            dificuldade = ent.nextInt();
+        } while (dificuldade < 0 || dificuldade > 2);
         switch(dificuldade) {
             case 0:
                 strDificuldade = "Fácil";
@@ -235,31 +238,61 @@ public class Main {
             case "comandos":
                 System.out.println(strComandos);
                 break;
+            case "cmd":
+                System.out.println(strComandos);
+                break;
             case "objetivo":
+                menuObjetivo(entPais);
+                break;
+            case "obj":
                 menuObjetivo(entPais);
                 break;
             case "status":
                 menuStatus();
                 break;
+            case "stt":
+                menuStatus();
+                break;
             case "habilidades":
+                menuHabilidades();
+                break;
+            case "hab":
                 menuHabilidades();
                 break;
             case "progresso":
                 menuProgresso();
                 break;
+            case "prg":
+                menuProgresso();
+                break;
             case "doenca":
+                menuDoenca(strNomeDoenca);
+                break;
+            case "doe":
                 menuDoenca(strNomeDoenca);
                 break;
             case "creditos":
                 menuCreditos();
                 break;
+            case "crd":
+                menuCreditos();
+                break;
             case "tutorial":
+                menuTutorial();
+                break;
+            case "tut":
                 menuTutorial();
                 break;
             case "infectar":
                 menuInfectar();
                 break;
+            case "inf":
+                menuInfectar();
+                break;
             case "evoluir":
+                menuEvoluir();
+                break;
+            case "evo":
                 menuEvoluir();
                 break;
             case "sair":
@@ -294,6 +327,7 @@ public class Main {
         String strDoenca =
                 strTituloDD
             + "\n| Nome da doença: " + strNomeDoenca
+            + "\n| Nível: " + nivelDoenca
             + "\n| Agente Infeccioso: " + strAgenteInf + "\n";
         mostraTextoLento(strDoenca);
     }
@@ -316,7 +350,9 @@ public class Main {
         String strStatus = 
                 strTituloDD
             + "\n| Número de Infectados: " + contaminados
-            + "\n| Número de Mortos: " + mortos + "\n";
+            + "\n| Número de Mortos: " + mortos
+            + "\n| "
+            + "\n| Cura: " + porcentagemCura + "\n";
         mostraTextoLento(strStatus);
     }
     
@@ -339,7 +375,22 @@ public class Main {
     }
     
     public static void calculoInfectar() {
-        
+        int infectar = 100;
+        switch (nivelDoenca) {
+            case 0:
+                contaminados = contaminados + infectar;
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
     }
     
     public static void menuEvoluir() {
@@ -348,10 +399,58 @@ public class Main {
     
     public static boolean podeEvoluir() {
         boolean podeEvoluir = false;
-        //if (contaminados >= ) {
-            
-        //}
+        double necessario = 0;
+        String strEvoluidoComSuc = strTituloDD + "\n| Evoluído com Sucesso! " + "\n| Nível: " + nivelDoenca;
+        if (contaminados >= 80%populacaoPais) {
+            nivelDoenca = 5;
+            maisPontosDeHabilidades(8);
+            System.out.println(strEvoluidoComSuc);
+        } else if (contaminados >= 60%populacaoPais) {
+            nivelDoenca = 4;
+            maisPontosDeHabilidades(8);
+            System.out.println(strEvoluidoComSuc);
+        } else if (contaminados >= 40%populacaoPais) {
+            nivelDoenca = 3;
+            maisPontosDeHabilidades(8);
+            System.out.println(strEvoluidoComSuc);
+        } else if (contaminados >= 20%populacaoPais) {
+            nivelDoenca = 2;
+            maisPontosDeHabilidades(4);
+            System.out.println(strEvoluidoComSuc);
+        } else if (contaminados >= 10%populacaoPais) {
+            nivelDoenca = 1;
+            maisPontosDeHabilidades(2);
+            System.out.println(strEvoluidoComSuc);
+        } else {
+            System.out.println("| Você não pode evoluir!");
+            switch (nivelDoenca) {
+                case 0:
+                    necessario = 10%populacaoPais;
+                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    break;
+                case 1:
+                    necessario = 20%populacaoPais;
+                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    break;
+                case 2:
+                    necessario = 40%populacaoPais;
+                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    break;
+                case 3:
+                    necessario = 60%populacaoPais;
+                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    break;
+                case 4:
+                    necessario = 80%populacaoPais;
+                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    break;
+            }
+        }
         return podeEvoluir;
+    }
+    
+    public static void maisPontosDeHabilidades(int maisPontos) {
+        
     }
     
     public static void menuHabilidades() {
