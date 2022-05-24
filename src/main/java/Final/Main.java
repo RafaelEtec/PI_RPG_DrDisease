@@ -13,6 +13,7 @@ public class Main {
     // Declarando variáveis Globais
     public static Scanner ent = new Scanner(System.in);
     public static String strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf;
+    public static String strCrashou = "| Crashou o Sistema, provavelmente por você ter tentado inserir palavras invés de números";
     public static String strTituloDD = "|----------------------------------------( Dr. Disease )----------------------------------------|",
                          strComando= "\n| Informe o comando:                                                                            |",
                          strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos\n"
@@ -27,17 +28,17 @@ public class Main {
                                      + "| <Tutorial>  ou       <tut> --> Explica como jogar o jogo\n"
                                      + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )";
     public static boolean boolJogando = true, boolTutorial = false;
-    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, dificuldade;
+    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf = -1, dificuldade;
     public static double porcentagemCont = 0, porcentagemMortos = 0;
-    public static int[] habilidades = new int[5];
+    public static int[] habilidades = new int[7];
     
-    // Res frio
-    // Res calor
-    // Infecciosidade
-    // Mortalidade
-    // Força de propagação
-    // Tempo de vida ou durabilidade
-    // resistência à vacina
+    // 0 - Res frio
+    // 1 - Res calor
+    // 2 - Infecciosidade
+    // 3 - Mortalidade
+    // 4 - Força de propagação
+    // 5 - Tempo de vida ou durabilidade
+    // 6 - resistência à vacina
     // 
     // 
     // 
@@ -45,6 +46,7 @@ public class Main {
     // Fácil (Sem cura) --- Normal (Tem cura) --- Difícil (A cura evolui mais rápido)
     
     public static void main(String[] args) {
+        menuTutorial();
         
         System.out.println(strTituloDD
                 + "\n| Informe o nome do Jogador: ");
@@ -68,7 +70,7 @@ public class Main {
     public static String nomeDoenca() {
         System.out.println(strTituloDD
                 + "\n| Olá "+strNomeJogador+"!"
-                + "\n| Agora o nome de Doença:                                                                       |");
+                + "\n| Agora o nome da Doença:                                                                       |");
         strNomeDoenca = ent.next();
         return strNomeDoenca;
     }
@@ -165,14 +167,23 @@ public class Main {
     }
     
     public static int agenteInfeccioso() {
-        String strAgenteInf = 
+        String strPedeAgenteInf = 
                   "| Agora escolha o agente Infeccioso: \n"
                 + "| <0> Vírus \n"
                 + "| <1> Bactéria \n"
                 + "| <2> Fungo \n"
                 + "| <3> Arma Biológica \n" + "\n";
-        mostraTextoLento(strAgenteInf);
+        mostraTextoLento(strPedeAgenteInf);
         entAgenteInf = ent.nextInt();
+        while (entAgenteInf < 0 || entAgenteInf > 3) {
+            System.out.println(
+                  "| Presta atenção! Escolhe denovo: \n"
+                + "| <0> Vírus \n"
+                + "| <1> Bactéria \n"
+                + "| <2> Fungo \n"
+                + "| <3> Arma Biológica");
+            entAgenteInf = ent.nextInt();
+        }
         switch (entAgenteInf) {
             case 0:
                 strAgenteInf = "Vírus";
@@ -184,7 +195,7 @@ public class Main {
                 strAgenteInf = "Fungo";
                 break;
             case 3:
-                strAgenteInf = "Arma Biológica" + "\n";
+                strAgenteInf = "Arma Biológica";
         }
         return entAgenteInf;
     }
@@ -299,6 +310,18 @@ public class Main {
     }
     
     public static void menuTutorial() {
-        
+        System.out.println(
+                strTituloDD
+              + "\n| Olá Humano, Raptamos você e mais alguns terráqueos para que nos ajudasse numa missão. \n"
+              + "| Nós somos da raça Onaiab, e Aihab é nosso Planeta-Natal, se encontra hà bilhões de quilômetros daqui.\n"
+              + "| Somos responsáveis pela Ordem Planetária, e quando encontramos planetas habitados, fazemos testes nele.\n"
+              + "| Para julgar se os habitantes são realmente capazes de controlar o astro em que vive.\n"
+              + "| Possuímos diversas técnicas de como testá-los."
+              + "| E é aqui que precisamos de sua ajuda, você será responsável por criar uma praga que será lançada na Terra,\n"
+              + "| Seu objetivo é contaminar todos do planeta, e eventualmente matá-los com uma praga evoluída.\n"
+              + "| "
+                      + "\n"
+              + "| \n"
+              + "| \n");
     }
 }
