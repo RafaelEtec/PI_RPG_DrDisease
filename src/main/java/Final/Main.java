@@ -12,8 +12,7 @@ public class Main {
     
     // Declarando variáveis Globais
     public static Scanner ent = new Scanner(System.in);
-    public static String strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf;
-    public static String strCrashou = "| Crashou o Sistema, provavelmente por você ter tentado inserir palavras invés de números";
+    public static String strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf, strDificuldade;
     public static String strTituloDD = "|----------------------------------------( Dr. Disease )----------------------------------------|",
                          strComando= "\n| Informe o comando:                                                                            |",
                          strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos\n"
@@ -28,17 +27,18 @@ public class Main {
                                      + "| <Tutorial>  ou       <tut> --> Explica como jogar o jogo\n"
                                      + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )";
     public static boolean boolJogando = true, boolTutorial = false;
-    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf = -1, dificuldade;
+    public static int contaminados = 100000000, mortos = 100000000, entPais, populacaoPais, entAgenteInf, dificuldade;
     public static double porcentagemCont = 0, porcentagemMortos = 0;
     public static int[] habilidades = new int[7];
+    public static String[] strHabilidades = {"Resistência ao Frio", "Resistência ao Calor", "Infecciosidade", "Mortalidade", "Força de Propagação", "Tempo de vida", "Resistência à vacina"};
     
-    // 0 - Res frio
-    // 1 - Res calor
-    // 2 - Infecciosidade
-    // 3 - Mortalidade
-    // 4 - Força de propagação
-    // 5 - Tempo de vida ou durabilidade
-    // 6 - resistência à vacina
+    // Res frio
+    // Res calor
+    // Infecciosidade
+    // Mortalidade
+    // Força de propagação
+    // Tempo de vida ou durabilidade
+    // resistência à vacina
     // 
     // 
     // 
@@ -46,7 +46,6 @@ public class Main {
     // Fácil (Sem cura) --- Normal (Tem cura) --- Difícil (A cura evolui mais rápido)
     
     public static void main(String[] args) {
-        menuTutorial();
         
         System.out.println(strTituloDD
                 + "\n| Informe o nome do Jogador: ");
@@ -56,10 +55,13 @@ public class Main {
         
         strNomeDoenca = nomeDoenca();
         
-        entAgenteInf = agenteInfeccioso();
-        
         entPais = armazenaPais();
         
+        salvaHabilidades();
+        
+        entAgenteInf = agenteInfeccioso();
+        
+        System.out.println(strComandos);
         while (boolJogando) {
             System.out.println(strTituloDD+strComando);
             entComando = ent.next();
@@ -70,9 +72,27 @@ public class Main {
     public static String nomeDoenca() {
         System.out.println(strTituloDD
                 + "\n| Olá "+strNomeJogador+"!"
-                + "\n| Agora o nome da Doença:                                                                       |");
+                + "\n| Agora o nome de Doença:                                                                       |");
         strNomeDoenca = ent.next();
         return strNomeDoenca;
+    }
+    
+    public static void salvaHabilidades() {
+        int pontos = 14;
+        while (pontos > 0) {
+            for (int pos = 0; pos < habilidades.length; pos++) {
+                System.out.println("| Você tem: "+pontos+" pontos para atribuir às habilidades.");
+                System.out.println(strHabilidades[pos]+": ");
+                int atribui = ent.nextInt();
+                while (atribui > pontos) {
+                    System.out.println("| Você possui apenas: "+pontos+" pontos!");
+                    System.out.println(strHabilidades[pos]+": ");
+                    atribui = ent.nextInt();
+                }
+                habilidades[pos] = atribui;
+                pontos = pontos - atribui;
+            }
+        }
     }
     
     public static int armazenaDificuldade(int dificuldade) {
@@ -83,6 +103,17 @@ public class Main {
                 + "\n| <2> Difícil - A Cura evolui mais rápido" + "\n";
         mostraTextoLento(strArmazenaDificuldade);
         dificuldade = ent.nextInt();
+        switch(dificuldade) {
+            case 0:
+                strDificuldade = "Fácil";
+                break;
+            case 1:
+                strDificuldade = "Normal";
+                break;
+            case 2:
+                strDificuldade = "Difícil";
+                break;
+        }
         return dificuldade;
     }
     
@@ -167,35 +198,34 @@ public class Main {
     }
     
     public static int agenteInfeccioso() {
-        String strPedeAgenteInf = 
+        String strMostraAgenteInf = 
                   "| Agora escolha o agente Infeccioso: \n"
-                + "| <0> Vírus \n"
-                + "| <1> Bactéria \n"
-                + "| <2> Fungo \n"
-                + "| <3> Arma Biológica \n" + "\n";
-        mostraTextoLento(strPedeAgenteInf);
+                + "| <0> Vírus ~ +4 Infecciosidade ~ +2 Mortalidade\n"
+                + "| <1> Bactéria ~ +3 Tempo de Vida ~ +3 Resistência à vacina\n"
+                + "| <2> Fungo ~ +2 Resistência ao Frio ~ +2 Resistência ao Calor\n"
+                + "| <3> Arma Biológica ~ +2 Infecciosidade ~ +4 Mortalidade\n" + "\n";
+        mostraTextoLento(strMostraAgenteInf);
         entAgenteInf = ent.nextInt();
-        while (entAgenteInf < 0 || entAgenteInf > 3) {
-            System.out.println(
-                  "| Presta atenção! Escolhe denovo: \n"
-                + "| <0> Vírus \n"
-                + "| <1> Bactéria \n"
-                + "| <2> Fungo \n"
-                + "| <3> Arma Biológica");
-            entAgenteInf = ent.nextInt();
-        }
         switch (entAgenteInf) {
             case 0:
                 strAgenteInf = "Vírus";
+                habilidades[2] = habilidades[2] + 4;
+                habilidades[3] = habilidades[3] + 2;
                 break;
             case 1:
                 strAgenteInf = "Bactéria";
+                habilidades[5] = habilidades[5] + 3;
+                habilidades[6] = habilidades[6] + 3;
                 break;
             case 2:
                 strAgenteInf = "Fungo";
+                habilidades[0] = habilidades[0] + 2;
+                habilidades[1] = habilidades[1] + 2;
                 break;
             case 3:
-                strAgenteInf = "Arma Biológica";
+                strAgenteInf = "Arma Biológica" + "\n";
+                habilidades[2] = habilidades[2] + 2;
+                habilidades[3] = habilidades[3] + 4;
         }
         return entAgenteInf;
     }
@@ -218,7 +248,7 @@ public class Main {
                 menuProgresso();
                 break;
             case "doenca":
-                menuDoenca(strNomeDoenca, strAgenteInf);
+                menuDoenca(strNomeDoenca);
                 break;
             case "creditos":
                 menuCreditos();
@@ -256,10 +286,11 @@ public class Main {
             strObjetivo = "| Seu atual objetivo é contaminar toda a população do " + strSeuPais
                              + "\n| População Total: " + populacaoPais + "\n";
         }
+        System.out.println("| Dificuldade do Jogo: " + strDificuldade);
         mostraTextoLento(strObjetivo);
     }
     
-    public static void menuDoenca(String strNomeDoenca, String strAgenteInf) {
+    public static void menuDoenca(String strNomeDoenca) {
         String strDoenca =
                 strTituloDD
             + "\n| Nome da doença: " + strNomeDoenca
@@ -290,6 +321,7 @@ public class Main {
     }
     
     public static void menuProgresso() {
+        calculaPorcentagem();
         String strProgresso =
                 strTituloDD
             + "\n| Porcentagem de Infectados: " + porcentagemCont
@@ -297,16 +329,36 @@ public class Main {
         mostraTextoLento(strProgresso);
     }
     
+    public static void calculaPorcentagem() {
+        porcentagemCont = populacaoPais%contaminados;
+        porcentagemMortos = populacaoPais%mortos;
+    }
+    
     public static void menuInfectar() {
+        calculoInfectar();
+    }
+    
+    public static void calculoInfectar() {
         
     }
     
     public static void menuEvoluir() {
-        
+        podeEvoluir();
+    }
+    
+    public static boolean podeEvoluir() {
+        boolean podeEvoluir = false;
+        //if (contaminados >= ) {
+            
+        //}
+        return podeEvoluir;
     }
     
     public static void menuHabilidades() {
-        
+        System.out.println(strTituloDD);
+        for (int pos = 0; pos < strHabilidades.length; pos++) {
+            System.out.println(strHabilidades[pos] + ": " + habilidades[pos]);
+        }
     }
     
     public static void menuTutorial() {
