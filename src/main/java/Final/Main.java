@@ -1,5 +1,6 @@
 package Final;
 import java.util.Scanner;
+import java.util.Random;
 /** 
    por:
    * Rafael Ferreira Goulart
@@ -15,24 +16,25 @@ public class Main {
     public static String strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf, strDificuldade;
     public static String strTituloDD = "|----------------------------------------( Dr. Disease )----------------------------------------|",
                          strComando= "\n| Informe o comando:                                                                            |",
-                         strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos\n"
-                                     + "| <Infectar>    ou     <inf> --> Propaga a sua doença"
-                                     + "| <Evoluir>     ou     <evo> --> Evolui a sua doença"
-                                     + "| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura"
-                                     + "| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo\n"
-                                     + "| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos\n"
-                                     + "| <Habilidades> ou     <hab> --> Mostra suas habilidades\n"
-                                     + "| <Progresso>   ou     <prg> --> Mostra seu Progresso no jogo\n"
-                                     + "| <Doenca>      ou     <doe> --> Mostra informações sobre a Doença\n"
-                                     + "| <Creditos>           <crd> --> Créditos do jogo\n"
-                                     + "| <Tutorial>  ou       <tut> --> Explica como jogar o jogo\n"
-                                     + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )";
+                         strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos                                  |\n"
+                                     + "| <Infectar>    ou     <inf> --> Propaga a sua doença                                           |\n"
+                                     + "| <Evoluir>     ou     <evo> --> Evolui a sua doença                                            |\n"
+                                     + "| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura                                   |\n"
+                                     + "| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo                                     |\n"
+                                     + "| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos     |\n"
+                                     + "| <Habilidades> ou     <hab> --> Mostra suas habilidades                                        |\n"
+                                     + "| <Progresso>   ou     <prg> --> Mostra seu Progresso no jogo                                   |\n"
+                                     + "| <Doenca>      ou     <doe> --> Mostra informações sobre a Doença                              |\n"
+                                     + "| <Creditos>           <crd> --> Créditos do jogo                                               |\n"
+                                     + "| <Historia>    ou     <his> --> Mostra novamente a história do jogo                            |\n"
+                                     + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )                                    |\n";
     public static boolean boolJogando = true, boolTutorial = false;
-    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, dificuldade, nivelDoenca = 0, paisFrio, paisCalor;
+    public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, jogadas = 0, dificuldade, nivelDoenca = 0, paisFrio, paisCalor;
     public static double porcentagemCont = 0, porcentagemMortos = 0, porcentagemCura = 0;
     public static int[] habilidades = new int[7];
+    public static int[] habPais = {0, 0};
     public static String[] strHabilidades = {"Resistência ao Frio", "Resistência ao Calor", "Infecciosidade", "Mortalidade", "Força de Propagação", "Tempo de vida", "Resistência à vacina"};
-
+    
     // Res frio - 0
     // Res calor - 1
     // Infecciosidade - 2
@@ -67,13 +69,28 @@ public class Main {
             System.out.println(strTituloDD+strComando);
             entComando = ent.next();
             mandaComando(entComando);
+            boolJogando = verificaVitoria(jogadas);
         }
+    }
+    
+    public static boolean verificaVitoria(int jogadas) {
+        boolJogando = true;
+        if (contaminados >= populacaoPais ) {
+            System.out.println(strTituloDD);
+            if (entPais == 1 || entPais == 4 || entPais == 7 || entPais == 9 || entPais == 10) {
+                System.out.println("| Parabéns! Você contaminou todos da " + strSeuPais + "\n| Em: " + jogadas + " Jogadas!");
+            } else {
+                System.out.println("| Parabéns! Você contaminou todos do " + strSeuPais + "\n| Em: " + jogadas + " Jogadas!");
+            }
+            boolJogando = false;
+        }
+        return boolJogando;
     }
     
     public static String nomeDoenca() {
         System.out.println(strTituloDD
                 + "\n| Olá "+strNomeJogador+"!"
-                + "\n| Agora o nome de Doença:                                                                       |");
+                + "\n| Agora o nome da Doença:                                                                       |");
         strNomeDoenca = ent.next();
         return strNomeDoenca;
     }
@@ -151,50 +168,74 @@ public class Main {
             case 0:
                 populacaoPais = 200000000;
                 strSeuPais = "Brasil";
+                habPais[0] = 3;
+                habPais[1] = 5;
                 break;
             case 1:
                 populacaoPais = 45000000;
                 strSeuPais = "Argentina";
+                habPais[0] = 3;
+                habPais[1] = 1;
                 break;
             case 2:
                 populacaoPais = 3500000;
                 strSeuPais = "Uruguai";
+                habPais[0] = 4;
+                habPais[1] = 1;
                 break;
             case 3:
                 populacaoPais = 7000000;
                 strSeuPais = "Paraguai";
+                habPais[0] = 1;
+                habPais[1] = 4;
                 break;
             case 4:
                 populacaoPais = 11000000;
                 strSeuPais = "Bolívia";
+                habPais[0] = 2;
+                habPais[1] = 2;
                 break;
             case 5:
                 populacaoPais = 33000000;
                 strSeuPais = "Peru";
+                habPais[0] = 1;
+                habPais[1] = 4;
                 break;
             case 6:
                 populacaoPais = 18000000;
                 strSeuPais = "Chile";
+                habPais[0] = 5;
+                habPais[1] = 0;
                 break;
             case 7:
                 populacaoPais = 46000000;
                 strSeuPais = "Colômbia";
+                habPais[0] = 1;
+                habPais[1] = 3;
                 break;
             case 8:
                 populacaoPais = 13000000;
                 strSeuPais = "Equador";
+                habPais[0] = 1;
+                habPais[1] = 5;
                 break;
             case 9:
                 populacaoPais = 31000000;
                 strSeuPais = "Venezuela";
+                habPais[0] = 4;
+                habPais[1] = 2;
                 break;
             case 10:
                 populacaoPais = 210000;
                 strSeuPais = "Guiana";
+                habPais[0] = 1;
+                habPais[1] = 5;
                 break;
             case 11:
                 populacaoPais = 550000;
                 strSeuPais = "Suriname";
+                habPais[0] = 2;
+                habPais[1] = 5;
                 break;
         }
         return entPais;
@@ -277,11 +318,11 @@ public class Main {
             case "crd":
                 menuCreditos();
                 break;
-            case "tutorial":
-                menuTutorial();
+            case "historia":
+                menuHistoria();
                 break;
-            case "tut":
-                menuTutorial();
+            case "his":
+                menuHistoria();
                 break;
             case "infectar":
                 menuInfectar();
@@ -366,8 +407,13 @@ public class Main {
     }
     
     public static void calculaPorcentagem() {
-        porcentagemCont = populacaoPais%contaminados;
-        porcentagemMortos = populacaoPais%mortos;
+        if (contaminados == 0) {
+            porcentagemCont = 0;
+            porcentagemMortos = 0;
+        } else {
+            porcentagemCont = populacaoPais * (contaminados / 100);
+            porcentagemMortos = populacaoPais * (mortos / 100);
+        }
     }
     
     public static void menuInfectar() {
@@ -376,21 +422,95 @@ public class Main {
     
     public static void calculoInfectar() {
         int infectar = 100;
+        int infectados = infectar;
         switch (nivelDoenca) {
             case 0:
-                contaminados = contaminados + infectar;
+                infectados = somaInfectar(infectar);
                 break;
             case 1:
+                infectar = 200;
+                infectados = somaInfectar(infectar);
                 break;
             case 2:
+                infectar = 400;
+                infectados = somaInfectar(infectar);
                 break;
             case 3:
+                infectar = 800;
+                infectados = somaInfectar(infectar);
                 break;
             case 4:
+                infectar = 1600;
+                infectados = somaInfectar(infectar);
                 break;
             case 5:
+                infectar = 3200;
+                infectados = somaInfectar(infectar);
                 break;
         }
+        contaminados = contaminados + (infectados);
+        String mensagem = mensagemInfectar(infectados);
+        mostraTextoLento(mensagem);
+        jogadas++;
+    }
+    
+    public static int somaInfectar(int infectar) {
+        Random ran = new Random();
+        int randomInfecciosidade = ran.nextInt(habilidades[2]);
+        infectar = ran.nextInt(infectar + (infectar / 2));
+        int infectados = infectar;
+        if (randomInfecciosidade == 0) {
+            infectados = infectar - (habPais[0]%infectar) - (habPais[1]%infectar) + infectar + (infectar * habilidades[4] / 10);
+        } else {
+            infectados = infectar - (habPais[0]%infectar) - (habPais[1]%infectar) + (infectar + (infectar * randomInfecciosidade / 10)) + (infectar * habilidades[4] / 10);
+        }
+        return infectados;
+    }
+    
+    public static String mensagemInfectar(int infectados) {
+        Random ran = new Random();
+        int posMsg = 0, guardaMsg = -1;
+        boolean podeSair = false;
+        String mensagem = "";
+        String[] mensagens = 
+        {
+            "| Após sair às ruas e tossir um pouco, você infectou: " + infectados + " pessoas.\n",
+            "| Que cheiro forte é esse? Seu perfume contaminado infectou: " + infectados + " pessoas.\n",
+            "| Bastou uma viajem de Uber para contaminar: " + infectados + " pessoas\n",
+            "| Não fui eu! O fedor dos seus peidos contaminou: " + infectados + " pessoas\n",
+            "| Tinder dos horrores: Aquela doce garota passou sua doença para: " + infectados + " pessoas\n",
+            "| Baladas são ótimas para contaminar pessoas: " + infectados + " infectados\n",
+            "| Estava tão difícil escolher os produtos no mercado, seu toque amaldiçoado infectou: " + infectados + " pessoas\n",
+            "| Pra que higiene? " + infectados + " pessoas que usaram o mesmo banheiro que você se infectaram.\n",
+            "| É uma pena sua namorada ter te deixado, mas veja pelo lado bom, ela passou sua doença para: " + infectados + " pessoas\n",
+            "| Superman: Seus olhares infectaram: " + infectados + " pessoas\n",
+            "| " + infectados + " pessoas\n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+            "| " + infectados + " \n",
+        };
+        while (!podeSair) {
+            posMsg = ran.nextInt(mensagens.length);
+            if (posMsg == guardaMsg) {
+                posMsg = ran.nextInt(mensagens.length);
+            } else {
+                guardaMsg = posMsg;
+                podeSair = true;
+            }
+        }
+        mensagem = mensagens[posMsg];
+        return mensagem;
     }
     
     public static void menuEvoluir() {
@@ -400,49 +520,49 @@ public class Main {
     public static boolean podeEvoluir() {
         boolean podeEvoluir = false;
         double necessario = 0;
-        String strEvoluidoComSuc = strTituloDD + "\n| Evoluído com Sucesso! " + "\n| Nível: " + nivelDoenca;
-        if (contaminados >= 80%populacaoPais) {
+        String strEvoluidoComSuc = strTituloDD + "\n| Evoluído com Sucesso! ";
+        if (contaminados >= (populacaoPais*0.8)) {
             nivelDoenca = 5;
+            System.out.println(strEvoluidoComSuc + "\nNível: "+nivelDoenca);
             maisPontosDeHabilidades(8);
-            System.out.println(strEvoluidoComSuc);
-        } else if (contaminados >= 60%populacaoPais) {
+        } else if (contaminados >= (populacaoPais*0.6)) {
             nivelDoenca = 4;
+            System.out.println(strEvoluidoComSuc + "\nNível: "+nivelDoenca);
             maisPontosDeHabilidades(8);
-            System.out.println(strEvoluidoComSuc);
-        } else if (contaminados >= 40%populacaoPais) {
+        } else if (contaminados >= (populacaoPais*0.4)) {
             nivelDoenca = 3;
+            System.out.println(strEvoluidoComSuc + "\nNível: "+nivelDoenca);
             maisPontosDeHabilidades(8);
-            System.out.println(strEvoluidoComSuc);
-        } else if (contaminados >= 20%populacaoPais) {
+        } else if (contaminados >= (populacaoPais*0.2)) {
             nivelDoenca = 2;
+            System.out.println(strEvoluidoComSuc + "\nNível: "+nivelDoenca);
             maisPontosDeHabilidades(4);
-            System.out.println(strEvoluidoComSuc);
-        } else if (contaminados >= 10%populacaoPais) {
+        } else if (contaminados >= (populacaoPais*0.1)) {
             nivelDoenca = 1;
+            System.out.println(strEvoluidoComSuc + "\nNível: "+nivelDoenca);
             maisPontosDeHabilidades(2);
-            System.out.println(strEvoluidoComSuc);
         } else {
             System.out.println("| Você não pode evoluir!");
             switch (nivelDoenca) {
                 case 0:
-                    necessario = 10%populacaoPais;
+                    necessario = (populacaoPais*0.1);
                     System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
                     break;
                 case 1:
-                    necessario = 20%populacaoPais;
+                    necessario = (populacaoPais*0.2);
                     System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
                     break;
                 case 2:
-                    necessario = 40%populacaoPais;
+                    necessario = (populacaoPais*0.4);
                     System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
                     break;
                 case 3:
-                    necessario = 60%populacaoPais;
+                    necessario = (populacaoPais*0.6);
                     System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
                     break;
                 case 4:
-                    necessario = 80%populacaoPais;
-                    System.out.println("| Evolução possível quando: \n| Contaminados >= " + necessario);
+                    necessario = (populacaoPais*0.8);
+                    System.out.println("| Evolução possível quando2: \n| Contaminados >= " + necessario);
                     break;
             }
         }
@@ -460,18 +580,16 @@ public class Main {
         }
     }
     
-    public static void menuTutorial() {
+    public static void menuHistoria() {
         System.out.println(
                 strTituloDD
-              + "\n| Olá Humano, Raptamos você e mais alguns terráqueos para que nos ajudasse numa missão. \n"
-              + "| Nós somos da raça Onaiab, e Aihab é nosso Planeta-Natal, se encontra hà bilhões de quilômetros daqui.\n"
-              + "| Somos responsáveis pela Ordem Planetária, e quando encontramos planetas habitados, fazemos testes nele.\n"
-              + "| Para julgar se os habitantes são realmente capazes de controlar o astro em que vive.\n"
-              + "| Possuímos diversas técnicas de como testá-los."
-              + "| E é aqui que precisamos de sua ajuda, você será responsável por criar uma praga que será lançada na Terra,\n"
-              + "| Seu objetivo é contaminar todos do planeta, e eventualmente matá-los com uma praga evoluída.\n"
-              + "| "
-                      + "\n"
+              + "\n|      Bom dia jovem Cobaia. Já fazem 8 horas desde que eu te seques... Que você pegou no sono eu iria dizer.\n"
+              + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n"
+              + "|      Sou o Doutor Disease, curiosamente trabalho \n"
+              + "| \n"
+              + "| \n"
+              + "| \n"
+              + "| \n"
               + "| \n"
               + "| \n");
     }
