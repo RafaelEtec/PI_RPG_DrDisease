@@ -13,7 +13,7 @@ public class Main {
     
     // Declarando variáveis Globais
     public static Scanner ent = new Scanner(System.in);
-    public static String strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf, strDificuldade;
+    public static String respostaP1, respostaP2, strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf, strDificuldade;
     public static String strTituloDD = "|----------------------------------------( Dr. Disease )----------------------------------------|",
                          strComando= "\n| Informe o comando:                                                                            |",
                          strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos                                  |\n"
@@ -28,7 +28,7 @@ public class Main {
                                      + "| <Creditos>           <crd> --> Créditos do jogo                                               |\n"
                                      + "| <Historia>    ou     <his> --> Mostra novamente a história do jogo                            |\n"
                                      + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )                                    |\n";
-    public static boolean boolJogando = true, boolTutorial = false;
+    public static boolean boolJogando = true, boolTutorial = true;
     public static int contaminados = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, jogadas = 0, dificuldade, nivelDoenca = 0, paisFrio, paisCalor;
     public static double porcentagemCont = 0, porcentagemMortos = 0, porcentagemCura = 0;
     public static int[] habilidades = new int[7];
@@ -49,6 +49,8 @@ public class Main {
     // Fácil (Sem cura) --- Normal (Tem cura) --- Difícil (A cura evolui mais rápido)
     
     public static void main(String[] args) {
+        
+        menuHistoria();
         
         System.out.println(strTituloDD
                 + "\n| Informe o nome do Jogador: ");
@@ -102,7 +104,7 @@ public class Main {
                 System.out.println("| Você tem: "+pontos+" pontos para atribuir às habilidades.");
                 System.out.println(strHabilidades[pos]+": ");
                 int atribui = ent.nextInt();
-                while (atribui > pontos) {
+                while (atribui > pontos || atribui < 0) {
                     System.out.println("| Você possui apenas: "+pontos+" pontos!");
                     System.out.println(strHabilidades[pos]+": ");
                     atribui = ent.nextInt();
@@ -162,8 +164,11 @@ public class Main {
                              + "| <9> Venezuela \n"
                              + "| <10> Guiana \n"
                              + "| <11> Suriname \n" + "\n";
-        mostraTextoLento(strEscolhePais);
-        entPais = ent.nextInt();
+        do {
+            System.out.println("| Atenção! Insira novamente:");
+            mostraTextoLento(strEscolhePais);
+            entPais = ent.nextInt();
+        } while (entPais < 0 || entPais > 11);
         switch(entPais) {
             case 0:
                 populacaoPais = 200000000;
@@ -248,8 +253,10 @@ public class Main {
                 + "| <1> Bactéria ~ +3 Tempo de Vida ~ +3 Resistência à vacina\n"
                 + "| <2> Fungo ~ +2 Resistência ao Frio ~ +2 Resistência ao Calor\n"
                 + "| <3> Arma Biológica ~ +2 Infecciosidade ~ +4 Mortalidade\n" + "\n";
-        mostraTextoLento(strMostraAgenteInf);
-        entAgenteInf = ent.nextInt();
+        do {
+            mostraTextoLento(strMostraAgenteInf);
+            entAgenteInf = ent.nextInt();
+        } while (entAgenteInf < 0 || entAgenteInf > 3);
         switch (entAgenteInf) {
             case 0:
                 strAgenteInf = "Vírus";
@@ -421,30 +428,30 @@ public class Main {
     }
     
     public static void calculoInfectar() {
-        int infectar = 100;
+        int infectar = 200;
         int infectados = infectar;
         switch (nivelDoenca) {
             case 0:
                 infectados = somaInfectar(infectar);
                 break;
             case 1:
-                infectar = 200;
-                infectados = somaInfectar(infectar);
-                break;
-            case 2:
                 infectar = 400;
                 infectados = somaInfectar(infectar);
                 break;
-            case 3:
+            case 2:
                 infectar = 800;
                 infectados = somaInfectar(infectar);
                 break;
-            case 4:
+            case 3:
                 infectar = 1600;
                 infectados = somaInfectar(infectar);
                 break;
-            case 5:
+            case 4:
                 infectar = 3200;
+                infectados = somaInfectar(infectar);
+                break;
+            case 5:
+                infectar = 6400;
                 infectados = somaInfectar(infectar);
                 break;
         }
@@ -484,7 +491,7 @@ public class Main {
             "| Pra que higiene? " + infectados + " pessoas que usaram o mesmo banheiro que você se infectaram.\n",
             "| É uma pena sua namorada ter te deixado, mas veja pelo lado bom, ela passou sua doença para: " + infectados + " pessoas\n",
             "| Superman: Seus olhares infectaram: " + infectados + " pessoas\n",
-            "| " + infectados + " pessoas\n",
+            "| Você vai à padaria e compra 6 pães, a nota de 2 reais suja passou por " + infectados + " pessoas\n",
             "| " + infectados + " \n",
             "| " + infectados + " \n",
             "| " + infectados + " \n",
@@ -581,16 +588,60 @@ public class Main {
     }
     
     public static void menuHistoria() {
-        System.out.println(
+        String opcao1p1 = 
+                strTituloDD
+              + "\n       Macacos me mordam! Acalme-se, não há o que temer, além do mais, VOCÊ concordou em estar aqui, temos um contrato hehehehe.\n"
+              + "| E eu sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+              + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+              + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
+        String opcao2p1 = 
+                strTituloDD
+              + "\n|      Sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+              + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+              + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
+        
+        String strHistoria1 = 
                 strTituloDD
               + "\n|      Bom dia jovem Cobaia. Já fazem 8 horas desde que eu te seques... Que você pegou no sono eu iria dizer.\n"
-              + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n"
-              + "|      Sou o Doutor Disease, curiosamente trabalho \n"
-              + "| \n"
-              + "| \n"
-              + "| \n"
-              + "| \n"
-              + "| \n"
+              + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n\n"
+              + "| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui!\n"
+              + "| <2> Realmente não me lembro de nada, me conta aí...\n";
+        String strHistoria2 = 
+                "| <1> E o que eu tenho a ver com isso!? \n"
+              + "| <2> Sinto muito pelos seus colegas, mas não me leve a mal, o que eu tenho a ver com isso? \n";
+        
+        System.out.println(strHistoria1);
+        int opcao1 = pegaOpcao();
+        switch (opcao1) {
+            case 1:
+                System.out.println("| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui! ");
+                System.out.println(opcao1p1);
+                respostaP1 = opcao1p1;
+                break;
+            case 2:
+                System.out.println("| <2> Realmente não me lembro de nada, me conta aí... \n");
+                System.out.println(opcao2p1);
+                respostaP1 = opcao2p1;
+                break;
+        }
+        System.out.println(strHistoria2);
+        int opcao2 = pegaOpcao();
+        
+        System.out.println(
+                strTituloDD
+              + "\n|      Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero."
+              + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
+              + "| Por que seu objetivo é espalhar essa praga por toda uma nação\n"
               + "| \n");
+    }
+    
+    public static int pegaOpcao() {
+        String strOpcaoInvalida = "Opção inválida! Informe novamente: ";
+        int opcao = ent.nextInt();
+        while (opcao < 1 || opcao > 2) {
+            System.out.println(strOpcaoInvalida);
+            opcao = ent.nextInt();
+        }
+        return opcao;
     }
 }
