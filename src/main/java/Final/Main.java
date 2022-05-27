@@ -50,11 +50,9 @@ public class Main {
     
     public static void main(String[] args) {
         
-        menuHistoria();
+        contaHistoria();
         
-        System.out.println(strTituloDD
-                + "\n| Informe o nome do Jogador: ");
-        strNomeJogador = ent.nextLine();
+        strNomeJogador = armazenaNome();
         
         dificuldade = armazenaDificuldade(dificuldade);
         
@@ -73,6 +71,13 @@ public class Main {
             mandaComando(entComando);
             boolJogando = verificaVitoria(jogadas);
         }
+    }
+    
+    public static String armazenaNome() {
+        System.out.println(strTituloDD
+                + "\n| Informe o nome do Jogador: ");
+        strNomeJogador = ent.nextLine();
+        return strNomeJogador;
     }
     
     public static boolean verificaVitoria(int jogadas) {
@@ -326,10 +331,10 @@ public class Main {
                 menuCreditos();
                 break;
             case "historia":
-                menuHistoria();
+                contaHistoria();
                 break;
             case "his":
-                menuHistoria();
+                contaHistoria();
                 break;
             case "infectar":
                 menuInfectar();
@@ -587,52 +592,89 @@ public class Main {
         }
     }
     
-    public static void menuHistoria() {
+    public static void contaHistoria() {
         String opcao1p1 = 
-                strTituloDD
-              + "\n       Macacos me mordam! Acalme-se, não há o que temer, além do mais, VOCÊ concordou em estar aqui, temos um contrato hehehehe.\n"
-              + "| E eu sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
-              + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
-              + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
-        String opcao2p1 = 
-                strTituloDD
-              + "\n|      Sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
-              + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
-              + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
-        
-        String strHistoria1 = 
-                strTituloDD
-              + "\n|      Bom dia jovem Cobaia. Já fazem 8 horas desde que eu te seques... Que você pegou no sono eu iria dizer.\n"
-              + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n\n"
-              + "| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui!\n"
-              + "| <2> Realmente não me lembro de nada, me conta aí...\n";
-        String strHistoria2 = 
-                "| <1> E o que eu tenho a ver com isso!? \n"
-              + "| <2> Sinto muito pelos seus colegas, mas não me leve a mal, o que eu tenho a ver com isso? \n";
-        
-        System.out.println(strHistoria1);
-        int opcao1 = pegaOpcao();
-        switch (opcao1) {
-            case 1:
-                System.out.println("| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui! ");
-                System.out.println(opcao1p1);
-                respostaP1 = opcao1p1;
-                break;
-            case 2:
-                System.out.println("| <2> Realmente não me lembro de nada, me conta aí... \n");
-                System.out.println(opcao2p1);
-                respostaP1 = opcao2p1;
-                break;
+                    strTituloDD
+                  + "\n       Macacos me mordam! Acalme-se, não há o que temer, além do mais, VOCÊ concordou em estar aqui, temos um contrato hehehehe.\n"
+                  + "| E eu sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+                  + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+                  + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
+            String opcao2p1 = 
+                    strTituloDD
+                  + "\n|      Sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+                  + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+                  + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n";
+
+            String strHistoria1 = 
+                    strTituloDD
+                  + "\n|      Bom dia jovem Cobaia. Já fazem 8 horas desde que eu te seques... Que você pegou no sono eu iria dizer.\n"
+                  + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n\n";
+
+            String respondeP1 =
+                    "| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui!\n"
+                  + "| <2> Realmente não me lembro de nada, me conta aí...\n";
+
+            String respondeP2 = 
+                    "| <1> Seres carnívoros? Praga? E o que EU tenho a ver com isso!? \n"
+                  + "| <2> Sinto muito pelos seus colegas, mas não me leve a mal, o que eu tenho a ver com isso? \n";
+
+            String opcao1p2 = 
+                    strTituloDD
+                  + "\n|      Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero."
+                  + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
+                  + "| Por que seu objetivo é espalhar essa praga por toda uma nação, assim que cumprir com a sua parte do contrato, cumprirei a minha.\n"
+                  + "| Darei à você o antídoto que te livrará da dor e sofrimento.\n";
+            String opcao2p2 = 
+                    strTituloDD
+                  + "|      Obrigado! eles eram ótimos! bons amigos e cientistas."
+                  + "| Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero."
+                  + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
+                  + "| Por que seu objetivo é espalhar essa praga por toda uma nação, assim que cumprir com a sua parte do contrato, cumprirei a minha.\n"
+                  + "| Darei à você o antídoto que te livrará da dor e sofrimento.\n";
+            String strRespFinal = "|      Agora me fale sobre você: ";
+        int opcao1, opcao2;
+        if (boolTutorial == false) {
+            System.out.println(strHistoria1);
+            System.out.println(respostaP1);
+            System.out.println(respostaP2);
+            System.out.println(strRespFinal);
+        } else {
+            System.out.println(strHistoria1);
+            System.out.println(respondeP1);
+            do {
+                opcao1 = pegaOpcao();
+            } while (opcao1 < 1 || opcao1 > 2);
+            switch (opcao1) {
+                case 1:
+                    System.out.println("| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui! ");
+                    System.out.println(opcao1p1);
+                    respostaP1 = opcao1p1;
+                    break;
+                case 2:
+                    System.out.println("| <2> Realmente não me lembro de nada, me conta aí... \n");
+                    System.out.println(opcao2p1);
+                    respostaP1 = opcao2p1;
+                    break;
+            }
+            System.out.println(respondeP2);
+            do {
+                opcao2 = pegaOpcao();
+            } while (opcao2 < 1 || opcao2 > 2);
+            switch (opcao2) {
+                case 1:
+                    System.out.println("| <1> Seres carnívoros? Praga? E o que EU tenho a ver com isso!? \n");
+                    System.out.println(opcao1p2);
+                    respostaP2 = opcao1p2;
+                    break;
+                case 2:
+                    System.out.println("| <2> Sinto muito pelos seus colegas, mas não me leve a mal, o que eu tenho a ver com isso? \n");
+                    System.out.println(opcao2p2);
+                    respostaP2 = opcao2p2;
+                    break;
+            }
+            System.out.println(strRespFinal);
+            boolTutorial = false;
         }
-        System.out.println(strHistoria2);
-        int opcao2 = pegaOpcao();
-        
-        System.out.println(
-                strTituloDD
-              + "\n|      Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero."
-              + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
-              + "| Por que seu objetivo é espalhar essa praga por toda uma nação\n"
-              + "| \n");
     }
     
     public static int pegaOpcao() {
