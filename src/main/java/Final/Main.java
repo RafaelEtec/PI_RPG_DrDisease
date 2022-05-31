@@ -431,13 +431,18 @@ public class Main {
                 + "\n| Cura: -" + posMsg,
                     "| Vitória! Invadindo a cozinha e cuspindo nas panelas do refeitório, você triunfa sobre eles."
                 + "\n| Infectados: " + infectados
-                + "\n| Cura: -" + posMsg,
+                + "\n| Cura: -" + posMsg
                 };
         String[] perdeu =
                 {
-                    "| Derrota! Um ",
-                    "",
-                    ""
+                    "| Derrota! Os guardas não foram com a sua cara, e logo na entrada expulsaram você."
+                + "\n| Cura: +" + posMsg,
+                    "| Derrota! Sua bomba de gás falhou e não foi acionada, você sai correndo ao som de Sweet Dreams."
+                + "\n| Cura: +" + posMsg,
+                    "| Derrota! Logo na entrada, sensores de radiação emitem alarmes, e você é expulso."
+                + "\n| Cura: +" + posMsg,
+                    "| Derrota! Estavam todos muito bem preparados para uma possivel invasão."
+                + "\n| Cura: +" + posMsg
                 };
         if (podeAtacar <= 0) {
             if (habilidades[6] == 0) {
