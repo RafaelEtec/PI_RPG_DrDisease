@@ -3,11 +3,11 @@ import java.util.Scanner;
 import java.util.Random;
 /**
  * por: 
- * Rafael Ferreira Goulart
- * Samuel J
- * Pedro
- * Vinícius
- * Mateus
+ *  Rafael Ferreira Goulart
+ *  Samuel José da Costa
+ *  Pedro Henrique Fogaça do Nascimento
+ *  Vinícius de Souza Oliveira
+ *  Matheus Garcia Manoel
  */
 public class Main {
 
@@ -527,30 +527,30 @@ public class Main {
     }
 
     public static void calculoInfectar() {
-        int infectar = 800;
+        int infectar = 400;
         int infectados = infectar;
         switch (nivelDoenca) {
             case 0:
                 infectados = somaInfectar(infectar);
                 break;
             case 1:
-                infectar = 1600;
+                infectar = 800;
                 infectados = somaInfectar(infectar);
                 break;
             case 2:
-                infectar = 3200;
+                infectar = 1600;
                 infectados = somaInfectar(infectar);
                 break;
             case 3:
-                infectar = 6400;
+                infectar = 3200;
                 infectados = somaInfectar(infectar);
                 break;
             case 4:
-                infectar = 12800;
+                infectar = 6400;
                 infectados = somaInfectar(infectar);
                 break;
             case 5:
-                infectar = 25600;
+                infectar = 12800;
                 infectados = somaInfectar(infectar);
                 break;
         }
