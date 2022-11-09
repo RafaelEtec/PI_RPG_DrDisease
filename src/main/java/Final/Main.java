@@ -1,4 +1,12 @@
 package Final;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 import java.util.Random;
 /**
@@ -15,18 +23,7 @@ public class Main {
     public static Scanner ent = new Scanner(System.in);
     public static String respostaP1, respostaP2, strNomeJogador, strNomeDoenca, entComando, strEntPais, strSeuPais, strAgenteInf, strDificuldade;
     public static String strTituloDD = "|----------------------------------------( Dr. Disease )----------------------------------------|",
-            strComando = "\n| Informe o comando:                                                                            |",
-            strComandos = "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos                                  |\n"
-            + "| <Infectar>    ou     <inf> --> Propaga a sua doença                                           |\n"
-            + "| <Evoluir>     ou     <evo> --> Evolui a sua doença                                            |\n"
-            + "| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura                                   |\n"
-            + "| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo                                     |\n"
-            + "| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos     |\n"
-            + "| <Habilidades> ou     <hab> --> Mostra suas habilidades                                        |\n"
-            + "| <Doenca>      ou     <doe> --> Mostra informações sobre a Doença                              |\n"
-            + "| <Creditos>           <crd> --> Créditos do jogo                                               |\n"
-            + "| <Historia>    ou     <his> --> Mostra novamente a história do jogo                            |\n"
-            + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )                                    |\n";
+            strComando = "\n| Informe o comando:                                                                            |";
     public static boolean boolJogando = true, boolTutorial = true;
     public static int podeAtacar = 10, guardaMsg, guardaLabMsg, contaminados = 0, cura = 0, mortos = 0, entPais, populacaoPais, entAgenteInf, jogadas = 0, dificuldade, nivelDoenca = 0, paisFrio, paisCalor;
     public static double porcentagemCura = 0;
@@ -43,8 +40,11 @@ public class Main {
     // resistência à vacina - 6
     // 
     // Fácil (Sem cura) --- Normal (Tem cura) --- Difícil (A cura evolui mais rápido)
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        
+        confereDiretorios();
+        confereArquivos();
+        
         contaHistoria();
 
         strNomeJogador = armazenaNome();
@@ -60,7 +60,8 @@ public class Main {
         entAgenteInf = agenteInfeccioso();
 
         boolTutorial = false;
-        System.out.println(strTituloDD + "\n" + strComandos);
+        System.out.println(strTituloDD);
+        leituraArquivo("./Comandos/comandos.txt");
         while (boolJogando == true) {
             System.out.println(strTituloDD + strComando);
             entComando = ent.next();
@@ -71,7 +72,59 @@ public class Main {
             boolJogando = verificaVitoria(jogadas);
         }
     }
+    
+    public static void confereDiretorios() throws IOException {
+        boolean existeCmd = Files.exists(Path.of("./Comandos"));
+        boolean existeHis = Files.exists(Path.of("./Historico"));
+        boolean existeDia = Files.exists(Path.of("./Dialogos"));
+        
+        if (!existeCmd) {
+            Path cmdDir = Files.createDirectory(Path.of("./Comandos"));
+            System.out.println(cmdDir.toAbsolutePath());
+        } else {
+            System.out.println("Diretório Comandos já existe");
+        }
+        if (!existeHis) {
+            Path hisDir = Files.createDirectory(Path.of("./Historico"));
+            System.out.println(hisDir.toAbsolutePath());
+        } else {
+            System.out.println("Diretório Historico já existe");
+        }
+        if (!existeDia) {
+            Path diaDir = Files.createDirectory(Path.of("./Dialogos"));
+            System.out.println(diaDir.toAbsolutePath());
+        } else {
+            System.out.println("Diretório Dialogos já existe");
+        }
+    }
 
+    public static void confereArquivos() throws IOException {
+        String strArq = "Arquivo criado: ", strExists = " já existe";
+        Path comandos = Path.of("./Comandos/comandos.txt");
+        
+        boolean existeCmd = Files.exists(Path.of("./Comandos/comandos.txt"));
+        
+        if (!existeCmd) {
+            comandos = Files.createFile(Path.of("./Comandos").resolve("comandos.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,
+              "| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos                                  |\n"
+            + "| <Infectar>    ou     <inf> --> Propaga a sua doença                                           |\n"
+            + "| <Evoluir>     ou     <evo> --> Evolui a sua doença                                            |\n"
+            + "| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura                                   |\n"
+            + "| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo                                     |\n"
+            + "| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos     |\n"
+            + "| <Habilidades> ou     <hab> --> Mostra suas habilidades                                        |\n"
+            + "| <Doenca>      ou     <doe> --> Mostra informações sobre a Doença                              |\n"
+            + "| <Creditos>           <crd> --> Créditos do jogo                                               |\n"
+            + "| <Historia>    ou     <his> --> Mostra novamente a história do jogo                            |\n"
+            + "| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )                                    |\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("comandos.txt" + strExists);
+        }
+    }
+    
     public static String armazenaNome() {
         System.out.println(strTituloDD
                 + "\n| Informe o nome do Jogador: ");
@@ -149,7 +202,7 @@ public class Main {
     public static void mostraTextoLento(String texto) {
         for (int posChar = 0; posChar < texto.length(); posChar++) {
             try {
-                Thread.sleep(15);
+                Thread.sleep(1);
                 System.out.print(texto.charAt(posChar));
             } catch (InterruptedException ex) {
                 System.out.println("| Algo deu Errado");
@@ -289,22 +342,25 @@ public class Main {
         }
         return entAgenteInf;
     }
-
-    public static void mandaComando(String entComando) {
+    
+    public static void leituraArquivo(String caminho) throws IOException {
+        Path cam = Paths.get(caminho);
+        
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(cam)))) {
+            while (bufferedReader.lines().iterator().hasNext()) {
+                String linha = bufferedReader.readLine();
+                System.out.println(linha);
+            }
+        }
+    }
+    
+    public static void mandaComando(String entComando) throws IOException {
         switch (entComando.toLowerCase()) {
             case "comandos":
-                System.out.println(strComandos);
-                break;
             case "cmd":
-                System.out.println(strComandos);
+                leituraArquivo("./Comandos/comandos.txt");
                 break;
             case "atacalab":
-                if (dificuldade == 1 || dificuldade == 2) {
-                    menuAtacaLab();
-                } else {
-                    System.out.println("| Não é possível atacar laboratórios nesta Dificuldade!                                         |");
-                }
-                break;
             case "lab":
                 if (dificuldade == 1 || dificuldade == 2) {
                     menuAtacaLab();
@@ -313,50 +369,34 @@ public class Main {
                 }
                 break;
             case "objetivo":
-                menuObjetivo(entPais);
-                break;
             case "obj":
                 menuObjetivo(entPais);
                 break;
             case "status":
-                menuStatus();
-                break;
             case "stt":
                 menuStatus();
                 break;
             case "habilidades":
-                menuHabilidades();
-                break;
             case "hab":
                 menuHabilidades();
                 break;
             case "doenca":
-                menuDoenca(strNomeDoenca);
-                break;
             case "doe":
                 menuDoenca(strNomeDoenca);
                 break;
             case "creditos":
-                menuCreditos();
-                break;
             case "crd":
                 menuCreditos();
                 break;
             case "historia":
-                contaHistoria();
-                break;
             case "his":
                 contaHistoria();
                 break;
             case "infectar":
-                menuInfectar();
-                break;
             case "inf":
                 menuInfectar();
                 break;
             case "evoluir":
-                menuEvoluir();
-                break;
             case "evo":
                 menuEvoluir();
                 break;

@@ -1,0 +1,11 @@
+| <Comandos>    ou     <cmd> --> Mostra essa lista de Comandos                                  |
+| <Infectar>    ou     <inf> --> Propaga a sua doença                                           |
+| <Evoluir>     ou     <evo> --> Evolui a sua doença                                            |
+| <AtacaLab>    ou     <lab> --> Ataca um laboratório de cura                                   |
+| <Objetivo>    ou     <obj> --> Informa seu atual Objetivo                                     |
+| <Status>      ou     <stt> --> Mostra informações sobre o número de contaminados e mortos     |
+| <Habilidades> ou     <hab> --> Mostra suas habilidades                                        |
+| <Doenca>      ou     <doe> --> Mostra informações sobre a Doença                              |
+| <Creditos>           <crd> --> Créditos do jogo                                               |
+| <Historia>    ou     <his> --> Mostra novamente a história do jogo                            |
+| <Sair> --> Finaliza o Jogo ( Você perderá seu progresso! )                                    |
