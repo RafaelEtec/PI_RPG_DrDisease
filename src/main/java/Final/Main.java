@@ -31,6 +31,8 @@ public class Main {
     public static int[] habPais = {0, 0};
     public static String[] strHabilidades = {"Resistência ao Frio", "Resistência ao Calor", "Infecciosidade", "Mortalidade", "Força de Propagação", "Evolução Rápida", "Resistência à vacina"};
     public static String[] strHabInfo = {"Torna sua doença mais resistente ao Frio", "Torna sua doença mais resistente ao Calor", "Aumenta a probabilidade de Infectar mais pessoas", "Aumenta a probabilidade de Matar mais pessoas", "O número mínimo de infectados é maior", "Torna o número necessário de contaminado menor para Evolução", "Dificulda o progresso da Cura"};
+    public static String fileComandos = "./Comandos/comandos.txt", fileOpcao1p1 = "./Dialogos/opcao1p1.txt", fileOpcao2p1 = "./Dialogos/opcao2p1.txt", fileHistoria1 = "./Dialogos/historia1.txt", fileRespondeP1 = "./Dialogos/respondeP1.txt", fileRespondeP2 = "./Dialogos/respondeP2.txt", fileOpcao1p2 = "./Dialogos/opcao1p2.txt", fileOpcao2p2 = "./Dialogos/opcao2p2.txt";
+    
     // Res frio - 0
     // Res calor - 1
     // Infecciosidade - 2
@@ -61,7 +63,7 @@ public class Main {
 
         boolTutorial = false;
         System.out.println(strTituloDD);
-        leituraArquivo("./Comandos/comandos.txt");
+        leituraArquivo(fileComandos);
         while (boolJogando == true) {
             System.out.println(strTituloDD + strComando);
             entComando = ent.next();
@@ -100,9 +102,16 @@ public class Main {
 
     public static void confereArquivos() throws IOException {
         String strArq = "Arquivo criado: ", strExists = " já existe";
-        Path comandos = Path.of("./Comandos/comandos.txt");
+        Path comandos = Path.of(fileComandos);
         
-        boolean existeCmd = Files.exists(Path.of("./Comandos/comandos.txt"));
+        boolean existeCmd = Files.exists(Path.of(fileComandos));
+        boolean existeOpcao1p1 = Files.exists(Path.of(fileOpcao1p1));
+        boolean existeOpcao2p1 = Files.exists(Path.of(fileOpcao2p1));
+        boolean existeHistoria1 = Files.exists(Path.of(fileHistoria1));
+        boolean existeRespondeP1 = Files.exists(Path.of(fileRespondeP1));
+        boolean existeRespondeP2 = Files.exists(Path.of(fileRespondeP2));
+        boolean existeOpcao1p2 = Files.exists(Path.of(fileOpcao1p2));
+        boolean existeOpcao2p2 = Files.exists(Path.of(fileOpcao2p2));
         
         if (!existeCmd) {
             comandos = Files.createFile(Path.of("./Comandos").resolve("comandos.txt"));
@@ -122,6 +131,91 @@ public class Main {
             StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
         } else {
             System.out.println("comandos.txt" + strExists);
+        }
+        
+        if (!existeOpcao1p1) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("opcao1p1.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD + 
+              "\n       Macacos me mordam! Acalme-se, não há o que temer, além do mais, VOCÊ concordou em estar aqui, temos um contrato hehehehe.\n"
+                + "| E eu sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+                + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+                + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("opcao1p1.txt" + strExists);
+        }
+        
+        if (!existeOpcao2p1) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("opcao2p1.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD +
+              "\n|      Sou o Doutor Disease, ex integrante do grupo de cientistas da Umbrella Corporation, acredite, fazíamos experimentos extraordinários lá.\n"
+                + "| Infelizmente o laboratório foi fechado, assim como boa parte dos meu colegas foram mortos, ou transformados em seres carnívoros.\n"
+                + "| Mas fazer o que, essas coisas acontecem. E passado é passado, estou seguindo em frente, e com uma nova... digamos \"Praga\".\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("opcao2p1.txt" + strExists);
+        }
+        
+        if (!existeHistoria1) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("historia1.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos, strTituloDD +
+              "\n|      Bom dia jovem Cobaia. Já fazem 8 horas desde que eu te seques... Que você pegou no sono eu iria dizer.\n"
+                + "| Caso não se lembre do por quê você está aqui, eu lhe contarei novamente.\n\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("historia1.txt" + strExists);
+        }
+        
+        if (!existeRespondeP1) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("respondeP1.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD +
+              "| <1> Sequestrado!?, Quem é você!?, onde é que eu tô!? Me tira daqui!\n"
+                + "| <2> Realmente não me lembro de nada, me conta aí...\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("respondeP1.txt" + strExists);
+        }
+        
+        if (!existeRespondeP1) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("respondeP2.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD +
+              "| <1> Seres carnívoros? Praga? E o que EU tenho a ver com isso!? \n"
+                + "| <2> Sinto muito pelos seus colegas, mas não me leve a mal, o que eu tenho a ver com isso? \n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("respondeP2.txt" + strExists);
+        }
+        
+        if (!existeOpcao1p2) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("opcao1p2.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD +
+              "\n|      Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero.\n"
+                + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
+                + "| Por que seu objetivo é espalhar essa praga por toda uma nação, assim que cumprir com a sua parte do contrato, cumprirei a minha.\n"
+                + "| Darei à você o antídoto que te livrará da dor e sofrimento.\n",    
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("opcao1p2.txt" + strExists);
+        }
+        
+        if (!existeOpcao2p2) {
+            comandos = Files.createFile(Path.of("./Dialogos").resolve("opcao2p2.txt"));
+            System.out.println(strArq + comandos.toAbsolutePath());
+            Files.writeString(comandos,strTituloDD +
+              "\n|      Obrigado! eles eram ótimos! bons amigos e cientistas."
+                + "\n| Ah, é claro, você está infectado com essa praga, mas não se preocupe, Você é o que chamamos de paciente zero.\n"
+                + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
+                + "| Por que seu objetivo é espalhar essa praga por toda uma nação, assim que cumprir com a sua parte do contrato, cumprirei a minha.\n"
+                + "| Darei à você o antídoto que te livrará da dor e sofrimento.\n",
+            StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
+        } else {
+            System.out.println("opcao2p2.txt" + strExists);
         }
     }
     
@@ -347,10 +441,9 @@ public class Main {
         Path cam = Paths.get(caminho);
         
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(cam)))) {
-            while (bufferedReader.lines().iterator().hasNext()) {
-                String linha = bufferedReader.readLine();
+            bufferedReader.lines().forEach(linha -> {
                 System.out.println(linha);
-            }
+            });
         }
     }
     
@@ -720,7 +813,7 @@ public class Main {
         }
     }
 
-    public static void contaHistoria() {
+    public static void contaHistoria() throws IOException {
         String opcao1p1
                 = strTituloDD
                 + "\n       Macacos me mordam! Acalme-se, não há o que temer, além do mais, VOCÊ concordou em estar aqui, temos um contrato hehehehe.\n"
@@ -759,15 +852,14 @@ public class Main {
                 + "| E está carregando essa doença com toda segurança, ou pelo menos só você está seguro.\n"
                 + "| Por que seu objetivo é espalhar essa praga por toda uma nação, assim que cumprir com a sua parte do contrato, cumprirei a minha.\n"
                 + "| Darei à você o antídoto que te livrará da dor e sofrimento.\n";
-        String strRespFinal = "\n|      Agora me fale sobre você: \n";
         int opcao1, opcao2;
         if (boolTutorial == false) {
-            mostraTextoLento(strHistoria1);
+            leituraArquivo(fileHistoria1);
             mostraTextoLento(respostaP1);
             mostraTextoLento(respostaP2);
-            mostraTextoLento(strRespFinal);
+            mostraTextoLento("| Agora me fale sobre você: \n");
         } else {
-            mostraTextoLento(strHistoria1);
+            leituraArquivo(fileHistoria1);
             mostraTextoLento(respondeP1);
             do {
                 opcao1 = pegaOpcao();
@@ -801,7 +893,7 @@ public class Main {
                     break;
             }
             if (boolTutorial == true) {
-                mostraTextoLento(strRespFinal);
+                mostraTextoLento("| Agora me fale sobre você: \n");
             }
         }
     }
